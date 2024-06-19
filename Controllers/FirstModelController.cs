@@ -12,7 +12,7 @@ namespace PracticeAPI.Controllers
     public class FirstModelController : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetAllHeroes()
+        public async Task<ActionResult<List<FirstModel>>> GetAllHeroes()
         {
             var heroes = new List<FirstModel> 
             {
