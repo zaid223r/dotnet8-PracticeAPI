@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using PracticeAPI.Data;
+using PracticeAPI.Interfaces;
+using PracticeAPI.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDBContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IFirstModelRepository,FirstModelRepository>();
 
 builder.Services.AddControllers();
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PracticeAPI.Entities;
+using PracticeAPI.Interfaces;
 
 namespace PracticeAPI.Controllers
 {
@@ -11,19 +12,16 @@ namespace PracticeAPI.Controllers
     [Route("api/[controller]")]
     public class FirstModelController : ControllerBase
     {
+        private readonly IFirstModelRepository _firstModel;
+        public FirstModelController(IFirstModelRepository firstModel)
+        {
+            _firstModel = firstModel;
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<FirstModel>>> GetAllHeroes()
         {
-            var heroes = new List<FirstModel> 
-            {
-                new FirstModel
-                {
-                    Id = 1,
-                    Name = "Batman"
-                }
-            };
-
-            return Ok(heroes);
+            return await _firstModel.GetAllAsync();
         }
     }
 }
