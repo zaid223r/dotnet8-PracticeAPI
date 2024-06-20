@@ -23,5 +23,42 @@ namespace PracticeAPI.Controllers
         {
             return await _firstModel.GetAllAsync();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] FirstModel firstModel)
+        {
+            var createdModel = await _firstModel.CreateAsync(firstModel);
+            return StatusCode(201,createdModel);
+        }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id,[FromBody] FirstModel firstModel)
+        {
+            var updatedModel = await _firstModel.UpdateAsync(id,firstModel);
+
+            if(updatedModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(updatedModel);            
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            var deletedModel = await _firstModel.DeleteAsync(id);
+
+            if(deletedModel == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+    
     }
 }

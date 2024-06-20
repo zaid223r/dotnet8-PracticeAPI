@@ -9,5 +9,8 @@ namespace PracticeAPI.Interfaces
     public interface IFirstModelRepository
     {
         Task<List<FirstModel>> GetAllAsync();
+        Task<FirstModel> CreateAsync(FirstModel firstModel);
+        Task<FirstModel?> UpdateAsync(int id, FirstModel firstModel);
+        Task<FirstModel?> DeleteAsync(int id);
     }
 }
